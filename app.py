@@ -2,7 +2,9 @@ from flask import Flask, request
 from flask_cors import CORS
 import torch
 import numpy as np
-from PIL import Image
+#from PIL import Image
+import matplotlib.pyplot as plt
+import matplotlib.image as mpimg
 
 app = Flask(__name__)
 CORS(app)
@@ -17,8 +19,13 @@ def hello_world():
 def predict():
 
     # load image
-    img = Image.open(request.files['file'].stream).convert(
-        'RGB').resize((224, 224))
+ #   img = Image.open(request.files['file'].stream).convert('RGB').resize((224, 224))
+
+    img=mpimg.imread(request.files['file'].stream)
+    img=img.astype('float32')
+    #img=img/255
+    
+
     img = np.array(img)
     img = torch.FloatTensor(img.transpose((2, 0, 1)) / 255)
 
