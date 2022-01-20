@@ -1,6 +1,6 @@
 from flask import Flask
 from flask_cors import CORS
-from PIL import Image
+#from PIL import Image
 
 app = Flask(__name__)
 CORS(app)
